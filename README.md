@@ -3,7 +3,7 @@ Applied Linear Regression Repository
 
 Proposed Term Paper Title:
 
-The Politics of Education Policy: How Party Affiliation Affects Public Attitudes Toward Free SHS in Ghana. 
+The Politics of Education Policy: Partisan Divides in Public Evaluation of Ghana’s Free SHS Program
 
 Research Question: 
 
