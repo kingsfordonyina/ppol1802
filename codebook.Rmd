@@ -21,42 +21,65 @@ This dataset is a description of Ghanaians view on the Free Senior High School P
 ## Variable description
 
 ### Dependent Variables: 
+## Survey Variables and Questions
 
-I). policy_support (Binary) Agree with statement 1 is 1 and Agree with Statement 2 is 0.
-Question asked in the survey: 
+### I. Policy Support (Binary)
+- **1** = Agree with Statement 1  
+- **0** = Agree with Statement 2  
 
-Statement 1:Government should have ensured that all the necessary structures for free SHS are in place before its implementation. 
+**Question asked in the survey:**  
+*"Which of the following statements is closest to your view? Choose Statement 1 or Statement 2."*
 
-Statement 2: Statement 2: Government took the right decision to start the implementation of the free SHS policy and address the challenges as they arise.   
+- **Statement 1:** *Government should have ensured that all the necessary structures for free SHS are in place before its implementation.*  
+- **Statement 2:** *Government took the right decision to start the implementation of the free SHS policy and address the challenges as they arise.*  
 
-II). opportunity (Categorical):   1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
-                                  4. Agree, 5. Strongly agree
+---
 
-Question: SHS policy has created opportunity for poor to obtain education.
+### II. Opportunity (Categorical)
+- **1** = Strongly Disagree  
+- **2** = Disagree  
+- **3** = Neither Agree nor Disagree  
+- **4** = Agree  
+- **5** = Strongly Agree  
 
+**Question asked in the survey:**  
+*"SHS policy has created opportunity for the poor to obtain education."*
 
-III) support (Categorical): 1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
-                           4. Agree, 5. Strongly agree
+---
 
-Question:  It is better to have free SHS even if it leads to an increase in the number of educated citizens who cannot find a job.
+### III. Support (Categorical)
+- **1** = Strongly Disagree  
+- **2** = Disagree  
+- **3** = Neither Agree nor Disagree  
+- **4** = Agree  
+- **5** = Strongly Agree  
 
-IV) target (Categorical): 1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
-                           4. Agree, 5. Strongly agree
+**Question asked in the survey:**  
+*"It is better to have free SHS even if it leads to an increase in the number of educated citizens who cannot find a job."*
 
-Question:  In implementing the free SHS policy, the government should have targeted only poor who otherwise will not be able to pay for secondary education.  
+---
 
+### IV. Target (Categorical)
+- **1** = Strongly Disagree  
+- **2** = Disagree  
+- **3** = Neither Agree nor Disagree  
+- **4** = Agree  
+- **5** = Strongly Agree  
+
+**Question asked in the survey:**  
+*"In implementing the free SHS policy, the government should have targeted only the poor who otherwise would not be able to pay for secondary education."*
 
 V)Index 
 
-## Main independent variables: 
-Independent Variable 1 (Political Affiliation - Binary). Question:  Do you feel close to any particular political party?
+## Main Independent Variable
 
-Yes is 1 and No otherwise.
+### 1. Political Affiliation and Political Party
+- **1** = Yes (Affiliated with NPP)  
+- **0** = No (Affiliated with NDC)  
 
+**Question asked in the survey:**  
+*"Which political party do you feel close to?"*
 
-Independent Variable 2 (Politically Affiliation and Political Party)
-
-1 is Yes (NPP) and 0 is No (NDC)
 
 ## Control Variables
 
