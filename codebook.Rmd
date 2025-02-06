@@ -15,17 +15,38 @@ clean_data <- as_factor(clean_data)
 ```
 
 ## Data Description
-This dataset is a description of Ghanaians view on the Free Senior High School Policy implemented by the New PatrioTic Party in 2017. It also comprises of demographic variables and their partisanship stand.These are all pulled from the Afrobarometer data round 8.
+This dataset is a description of Ghanaians view on the Free Senior High School Policy implemented by the New PatrioTic Party in 2017. It also comprises of demographic variables and their partisanship stand.I extracted them from from the Afrobarometer data round 8.
 
 
 ## Variable description
-### Main Dependent Variable: policy_support (Binary) Agree with statement 1 is 1 and Agree with Statement 2 is 0.
+
+### Dependent Variables: 
+
+I). policy_support (Binary) Agree with statement 1 is 1 and Agree with Statement 2 is 0.
 Question asked in the survey: 
 
 Statement 1:Government should have ensured that all the necessary structures for free SHS are in place before its implementation. 
 
 Statement 2: Statement 2: Government took the right decision to start the implementation of the free SHS policy and address the challenges as they arise.   
 
+II). opportunity (Categorical):   1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
+                                  4. Agree, 5. Strongly agree
+
+Question: SHS policy has created opportunity for poor to obtain education.
+
+
+III) support (Categorical): 1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
+                           4. Agree, 5. Strongly agree
+
+Question:  It is better to have free SHS even if it leads to an increase in the number of educated citizens who cannot find a job.
+
+IV) target (Categorical): 1. Strongly disagree, 2. Disagree, 3. Neither agree nor disagree,
+                           4. Agree, 5. Strongly agree
+
+Question:  In implementing the free SHS policy, the government should have targeted only poor who otherwise will not be able to pay for secondary education.  
+
+
+V)Index 
 
 ## Main independent variables: 
 Independent Variable 1 (Political Affiliation - Binary). Question:  Do you feel close to any particular political party?
@@ -52,10 +73,15 @@ Employment (Categorical)
 library(dplyr)
 
 clean_data%>% 
-  select(policy_support, age, hh_size, sex, religion, education, employment) %>% 
+  select(opportunity, support, target, policy_support, support_index, age, hh_size, sex, religion, education, employment, urban, present_cond, asset, trust_index, corruption) %>% 
   summary()
 ```
 
+
+```{r}
+# Convert to data frame explicitly (if needed)
+data <- as.data.frame(clean_data)
+```
 
 
 ```{r}
@@ -81,4 +107,100 @@ ggplot(clean_data_long, aes(x = Value, fill = Variable)) +
 ```
 
 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(stringr)
+
+# Remove numbers and drop NAs from REGION names
+clean_data <- clean_data %>%
+  mutate(REGION = str_remove(REGION, "^[0-9]+\\.\\s*")) %>%  # Removes leading numbers & dots
+  filter(!is.na(partisanship))  # Drops NAs from REGION
+
+# Now, plot again with clean labels
+ggplot(clean_data, aes(y = REGION, fill = as.factor(partisanship))) +
+  geom_bar(position = "fill") +
+  scale_x_continuous(labels = scales::percent) +
+  labs(title = "Partisanship Distribution by Region",
+       y = "Region", x = "Percentage",
+       fill = "Partisanship") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title
+
+```
+
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Convert 'age' to numeric (if it's stored as character or factor)
+data_clean <- clean_data %>%
+  mutate(age = as.numeric(as.character(age)))  # Ensures it's numeric
+
+# Bin Age into Groups (5-year intervals)
+data_clean <- clean_data %>%
+  mutate(age_group = cut(age, 
+                         breaks = seq(15, 90, by = 5),  # 5-year bins
+                         labels = paste(seq(15, 85, by = 5), "-", seq(19, 89, by = 5)),
+                         right = FALSE))
+
+# Ensure Partisanship is a Factor
+data_clean$partisanship <- as.factor(data_clean$partisanship)
+
+# Create Density Plot
+ggplot(data_clean, aes(x = age, fill = partisanship)) +
+  geom_density(alpha = 0.5) +
+  scale_x_continuous(breaks = seq(15, 90, by = 5)) +  # Reduce axis clutter
+  labs(title = "Age Distribution by Partisanship",
+       x = "Age Group", y = "Density",
+       fill = "Partisanship") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate labels
+
+```
+
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+# Remove NAs from the Political Party variable
+data_clean <- data_clean %>%
+  filter(!is.na(pol_party))  # Drop missing values
+
+# Create Boxplot Without NAs
+ggplot(data_clean, aes(x = as.factor(pol_party), y = trust_index, fill = as.factor(pol_party))) +
+  geom_boxplot() +
+  labs(title = "Trust in Institutions by Political Party",
+       x = "Political Party", y = "Trust Index",
+       fill = "Party") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title only
+
+
+```
+
+```{r}
+
+library(ggplot2)
+library(dplyr)
+
+# Remove NAs from Policy Support variable
+data_clean <- data_clean %>%
+  filter(!is.na(policy_support))  # Drop missing values
+
+# Create Stacked Bar Chart Without NAs
+ggplot(data_clean, aes(x = as.factor(policy_support), fill = as.factor(partisanship))) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Policy Support by Partisanship",
+       x = "Policy Support Level", y = "Percentage",
+       fill = "Partisanship") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))  # Center the title only
+
+
+```
 
