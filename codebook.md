@@ -22,7 +22,7 @@ are all pulled from the Afrobarometer data round 8.
 
 ### Main Dependent Variable: policy_support (Binary) Agree with statement 1 is 1 and Agree with Statement 2 is 0.
 
-Question asked in the survey:
+Question asked in the survey(Afrobarometer): 
 
 Statement 1:Government should have ensured that all the necessary
 structures for free SHS are in place before its implementation.
