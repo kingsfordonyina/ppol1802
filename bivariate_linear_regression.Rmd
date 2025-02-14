@@ -1,0 +1,51 @@
+---
+title: " Bivariate Linear Regression"
+output: github_document
+---
+
+
+
+```{r}
+# Loading the data
+library(haven)
+clean_data <- read_dta("~/GitHub/ppol1802/clean_data.dta")
+
+# Convert labeled variables back to factors
+clean_data <- as_factor(clean_data)
+
+```
+
+
+```{r}
+library(rstanarm)
+
+fit <- stan_glm(trust_index ~ pol_party, data = clean_data)
+print(fit)
+
+```
+
+
+```{r}
+a_hat <- coef(fit)[1]
+b_hat <- coef(fit)[2]
+```
+
+
+```{r}
+plot(as.numeric(clean_data$pol_party), clean_data$trust_index)
+x_bar <- mean(as.numeric((clean_data$pol_party)), na.rm =T)
+abline(a_hat, b_hat)
+
+text(x_bar, a_hat + b_hat * x_bar, 
+     paste("trust_index =", round(a_hat, 1), "+", round(b_hat, 1), "pol_party"), 
+     adj = 0)
+```
+
+
+```{r}
+R2 <- 1 - sigma(fit)^2 /sd(clean_data$trust_index)^2
+print(R2)
+```
+
+
+Interpretation: Now since my main IV is binary, the regression output insinuates that belong to 1 (the New Patriotic Party) results in an increase in the trust index by 0.3 units. The R2 also insinuates that the predictor explains the outcome variable which is trust index by 43%.
