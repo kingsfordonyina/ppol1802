@@ -2,8 +2,8 @@
 title: "Causal Model for FSHS Support"
 author: "Kingsford Onyina"
 output:
-  word_document: default
   pdf_document: default
+  word_document: default
   github_document: default
 ---
 
@@ -81,7 +81,7 @@ ggdag(dag)
 - **trust_ruling** (Trust in ruling party)  
 - - **education**  (No primary education, primary, secondary and tertiary)
 
-## **3. Collider**
+## **Collider**
 - Didn't find any collider unfortunately.
 
 
