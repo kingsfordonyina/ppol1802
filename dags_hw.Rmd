@@ -3,8 +3,8 @@ title: "Causal Model for FSHS Support"
 author: "Kingsford Onyina"
 output:
   word_document: default
-  github_document: default
   pdf_document: default
+  github_document: default
 ---
 
 
@@ -21,7 +21,7 @@ clean_data <- as_factor(clean_data)
 
 
 # **1. Theoretical Model**
-This model examines the relationship between partisanship (`p_afil`) and support for Ghana's Free Senior High School (FSHS) (`index_bin`). It includes confounders, mediators, and colliders.
+This model examines the relationship between partisanship (`p_afil`) and support for Ghana's Free Senior High School (FSHS) (`index_bin`). It includes confounders, mediators, and potential colliders.
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}

@@ -96,10 +96,8 @@ adjustmentSets(dag, exposure = "p_afil", outcome = "index_bin")
 
     ## { age, corruption, education, employment, hh_size, urban }
 
-# **4. Identify Minimal Adjustment Set**
-
 ``` r
-# Highlight the minimal adjustment set in the DAG
+# Highlighting the minimal adjustment set in the DAG
 ggdag_adjustment_set(dag, exposure = "p_afil", outcome = "index_bin") +
   theme_minimal() +
   labs(title = "Minimal Adjustment Set for Estimating Causal Effect of Partisanship on FSHS Support")
