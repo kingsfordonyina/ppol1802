@@ -1,0 +1,109 @@
+---
+title: "Multiple Linear Regression"
+author: "Kingsford Onyina"
+output:
+  github_document: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+  word_document: default
+---
+
+
+```{r}
+# Loading the data
+library(haven)
+clean_data <- read_dta("~/GitHub/ppol1802/clean_data.dta")
+
+
+# Convert labeled variables back to factors
+clean_data <- as_factor(clean_data)
+
+```
+
+
+Based on my minimal adjustment set, I estimate a simple multiple linear regression below.
+
+```{r}
+library(dplyr)
+# Convert age and hh_size to numeric
+clean_data <- clean_data %>%
+  mutate(age = as.numeric(as.character(age)),
+         hh_size = as.numeric(as.character(hh_size)))
+
+# Run the adjusted model
+lm_model <- lm(index_bin ~ p_afil + age + corruption + education + employment + hh_size + urban, data = clean_data)
+summary(lm_model)
+
+```
+
+The results show that partisanship is strongly associated with FSHS support, with NPP affiliates 14.2 percentage points more likely to support the policy. Perceptions of corruption remain significant, as those who believe corruption decreased somewhat (7.9 percentage points) or significantly (17.2 percentage points) show higher support. Age, now treated as continuous, shows a small but significant positive association (0.1 percentage points per year), suggesting older individuals are slightly more supportive. Education and urban residence are marginally significant, with those having primary education (7.3 percentage points) showing higher support, while urban dwellers exhibit a weak positive association (3.2 percentage points). Household size and employment status are not significant predictors. The model, now correctly aligned with the minimal adjustment set, explains 15.5% of the variation in FSHS support, confirming that other unobserved factors influence public opinion.
+
+
+
+# **Does the Model Deviate from the Minimal Adjustment Set?
+
+My model aligns with the minimal adjustment set, but some confounders seem unnecessary. Household size and employment status do not significantly influence the relationship between partisanship and FSHS support, reducing efficiency without adding value. Urban residency shows only marginal significance, suggesting a weak impact. Age remains significant, showing a small positive association, while corruption perception plays a crucial role, reinforcing its importance. Although the model supports my adjustment strategy, removing non-significant confounders could enhance precision without compromising validity.
+
+
+# **Multicollinearity Check (VIF Test)
+
+```{r}
+library(car)
+vif(lm_model)
+```
+
+This insniates absence of of multicollinearity since all the VIFs are < 10
+
+
+
+# **Based on the reading, I opted for the residual plots.
+
+```{r}
+# Residuals vs. Fitted Plot (Linearity & Homoscedasticity)
+plot(lm_model, which = 1, main = "Residuals vs. Fitted")
+
+# Normal Q-Q Plot (Normality of Residuals)
+plot(lm_model, which = 2, main = "Normal Q-Q Plot")
+
+```
+
+# ***Interpretation
+The Residuals vs. Fitted plot shows a structured pattern rather than random scatter, suggesting potential heteroskedasticity or non-linearity in the model. The residuals are not randomly distributed around zero, indicating that some variance is not well captured by the model.
+
+The Normal Q-Q plot shows deviations from normality at both extremes, particularly in the lower and upper tails. This suggests that the residuals are not perfectly normally distributed, which could impact inference and standard errors.
+
+
+# **Heteroskedasticity Test (Breusch-Pagan Test)
+
+```{r}
+library(lmtest)
+bptest(lm_model)
+```
+
+With the p-value being insignificant insinuates that the standard errors are robust.
+
+
+# **Normality of Residuals
+
+```{r}
+shapiro.test(residuals(lm_model))  # Shapiro-Wilk test
+hist(residuals(lm_model), breaks = 30, main = "Residuals Histogram")  # Histogram
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

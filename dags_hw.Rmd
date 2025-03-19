@@ -2,9 +2,9 @@
 title: "Causal Model for FSHS Support"
 author: "Kingsford Onyina"
 output:
-  pdf_document: default
-  word_document: default
   github_document: default
+  word_document: default
+  pdf_document: default
 ---
 
 
@@ -79,7 +79,7 @@ ggdag(dag)
 - **trust_index** (Trust in institutions is an index created from a battery of questions on trust in presidency, court system, parliament, electoral commision etc. )  
 - **political_participation** (An index from a battery of questions that depicts political participation: voting, disucssion of politics, attending rallies, contacting political party officials) 
 - **trust_ruling** (Trust in ruling party)  
-- - **education**  (No primary education, primary, secondary and tertiary)
+- **education**  (No primary education, primary, secondary and tertiary)
 
 ## **Collider**
 - Didn't find any collider unfortunately.

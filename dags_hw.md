@@ -21,7 +21,7 @@ clean_data <- as_factor(clean_data)
 
 This model examines the relationship between partisanship (`p_afil`) and
 support for Ghana’s Free Senior High School (FSHS) (`index_bin`). It
-includes confounders, mediators, and colliders.
+includes confounders, mediators, and potential colliders.
 
 ``` r
 dag <- dagitty('dag {
@@ -66,25 +66,19 @@ ggdag(dag)
 
 - **access_info** (Access to information which is an index from a
   battery of questions from radio, TV, newspaper, internet, media)  
-
 - **civic_engagement**(An index from a battery of questions that depicts
   civic engagement: protesting, attending community meeting, contacting
   traditional leader, contacting local government, raising issues)  
-
 - **trust_index** (Trust in institutions is an index created from a
   battery of questions on trust in presidency, court system, parliament,
   electoral commision etc. )  
-
 - **political_participation** (An index from a battery of questions that
   depicts political participation: voting, disucssion of politics,
   attending rallies, contacting political party officials)
-
 - **trust_ruling** (Trust in ruling party)  
+- **education** (No primary education, primary, secondary and tertiary)
 
-- - **education** (No primary education, primary, secondary and
-    tertiary)
-
-## **3. Collider**
+## **Collider**
 
 - Didn’t find any collider unfortunately.
 
